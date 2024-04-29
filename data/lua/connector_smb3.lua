@@ -581,6 +581,12 @@ function cb_video_do_update ()
         memory.write_u8(0x28B7, 0xEC, "PPU Bus") -- L
         memory.write_u8(0x28B8, 0xEE, "PPU Bus") -- D
         memory.write_u8(0x28B9, 0xFE, "PPU Bus") -- _
+        -- place a sprite for the pipe we added
+        -- for World 1
+        memory.write_u8(0x02C4, 0x7F) -- Y 
+        memory.write_u8(0x02C5, 0xF0) -- Tile
+        memory.write_u8(0x02C6, 0x01) -- Attr
+        memory.write_u8(0x02C7, 0x64) -- X
         if DEBUG then
             gui.addmessage("DEBUG: Modify WZ banner")
         end
