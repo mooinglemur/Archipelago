@@ -351,6 +351,8 @@ components: list[Component] = [
               description="Host a generated multiworld on your computer."),
     Component('Generate', 'Generate', cli=True,
               description="Generate a multiworld with the YAMLs in the players folder."),
+    Component('Generate Looped', 'GenerateLooped', cli=True,
+              description="Retry generation in a fresh process until it succeeds."),
     Component("Options Creator", "OptionsCreator", "ArchipelagoOptionsCreator", component_type=Type.TOOL,
               description="Visual creator for Archipelago option files."),
     Component("Install APWorld", func=install_apworld, file_identifier=SuffixIdentifier(".apworld"),

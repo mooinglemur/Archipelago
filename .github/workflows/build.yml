@@ -11,6 +11,8 @@ on:
       - 'requirements.txt'
       - '*.iss'
       - 'worlds/*/archipelago.json'
+      - 'GenerateLooped.py'
+      - 'worlds/LauncherComponents.py'
   pull_request:
     paths:
       - '.github/workflows/build.yml'
@@ -18,6 +20,8 @@ on:
       - 'requirements.txt'
       - '*.iss'
       - 'worlds/*/archipelago.json'
+      - 'GenerateLooped.py'
+      - 'worlds/LauncherComponents.py'
   workflow_dispatch:
 
 env:
@@ -88,6 +92,7 @@ jobs:
             build/exe.*/ArchipelagoLauncher.exe
             build/exe.*/ArchipelagoLauncherDebug.exe
             build/exe.*/ArchipelagoGenerate.exe
+            build/exe.*/ArchipelagoGenerateLooped.exe
             build/exe.*/ArchipelagoServer.exe
             dist/${{ env.ZIP_NAME }}
             setups/${{ env.SETUP_NAME }}
@@ -109,6 +114,11 @@ jobs:
           cd build/exe*
           cp Players/Templates/VVVVVV.yaml Players/
           timeout 30 ./ArchipelagoGenerate
+      - name: Test Generate Looped
+        shell: bash
+        run: |
+          cd build/exe*
+          timeout 60 ./ArchipelagoGenerateLooped --max_attempts 2
       - name: Store 7z
         uses: actions/upload-artifact@v7.0.0
         with:
@@ -177,6 +187,7 @@ jobs:
           subject-path: |
             build/exe.*/ArchipelagoLauncher
             build/exe.*/ArchipelagoGenerate
+            build/exe.*/ArchipelagoGenerateLooped
             build/exe.*/ArchipelagoServer
             dist/${{ env.APPIMAGE_NAME }}*
             dist/${{ env.TAR_NAME }}
@@ -202,6 +213,11 @@ jobs:
           cd build/exe*
           cp Players/Templates/VVVVVV.yaml Players/
           timeout 30 ./ArchipelagoGenerate
+      - name: Test Generate Looped
+        shell: bash
+        run: |
+          cd build/exe*
+          timeout 60 ./ArchipelagoGenerateLooped --max_attempts 2
       - name: Store AppImage
         uses: actions/upload-artifact@v7.0.0
         with:
